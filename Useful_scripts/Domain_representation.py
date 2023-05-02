@@ -8,8 +8,8 @@ import pandas as pd
 from Bio import SeqIO
 from ete3 import Tree, SeqMotifFace, TreeStyle, NodeStyle
 
-from CyanoScripts.MyPackage.FastaEditing import edit_NCBI_ids
-from CyanoScripts.MyPackage.FileMethods import file_from_list
+from Cyanopackage.FastaEditing import edit_NCBI_ids
+from Cyanopackage.FileMethods import file_from_list
 
 
 def itol_annotation(sequence_file, outfile, hexcode, domainname, dataframe, domainform):

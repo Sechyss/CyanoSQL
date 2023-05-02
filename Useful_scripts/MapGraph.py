@@ -5,9 +5,7 @@ import pandas as pd
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 
 world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
-data = pd.read_excel('/Users/u1866168/Documents/OneDrive - University of '
-                     'Warwick/Experiments/Transcriptomic_Analysis/PhosphatasesAMT.xlsx', sheet_name='AMT23',
-                     index_col='Station')
+data = pd.read_excel('/Users/u2176312/Downloads/PhosphatasesAMT.xlsx', sheet_name='AMT23', index_col='Station')
 gdf = gpd.GeoDataFrame(data, geometry=gpd.points_from_xy(data.Longitude, data.Latitude))
 
 fig = plt.figure()
@@ -44,7 +42,7 @@ patch1 = mpatches.Patch(color=colors[1], label='$\mathit{phoX}$')
 patch2 = mpatches.Patch(color=colors[2], label='$\mathit{psip1}$')
 legend = ax_map.legend(handles=[patch0, patch1, patch2], loc=1)
 legend.get_frame().set_alpha(None)
-plt.savefig('/Users/u1866168/Documents/OneDrive - University of '
-            'Warwick/Experiments/Transcriptomic_Analysis/PlotAMT23DATA_Phosphatases_paper.pdf', dpi=300)
+plt.savefig('/Users/u2176312/OneDrive - University of '
+            'Warwick/Thesis/Paper Draft/PlotAMT23DATA_Phosphatases_paper.png', dpi=300)
 
 plt.show()

@@ -20,9 +20,10 @@ gdf2.plot(ax=ax_map, color='green', alpha=0.6, markersize=10, marker='*')
 
 patch0 = mpatches.Patch(color='red', label='AMT22(JC079)')
 patch1 = mpatches.Patch(color='green', label='AMT23(JR300)')
-font = font_manager.FontProperties(family= 'Times new roman',  # 'Times new roman',
+font = font_manager.FontProperties(family='Times new roman',  # 'Times new roman',
                                    weight='bold',
                                    style='normal')
 legend = ax_map.legend(handles=[patch0, patch1], loc=1, prop=font)
 legend.get_frame().set_alpha(None)
+plt.savefig('/Users/u2176312/Downloads/AMTCruises.png', dpi=300)
 plt.show()
