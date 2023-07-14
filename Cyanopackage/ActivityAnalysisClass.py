@@ -9,7 +9,7 @@ from sklearn.metrics import r2_score
 
 class MetalActivityData:
     """ Provided a dataframe with the different columns for the different metals, it will fit the curves of the
-    different abs/time and it will calculate the R coefficient of the element"""
+    different abs/time, and it will calculate the R coefficient of the element"""
 
     def __init__(self, dataframe):
         self.df = dataframe

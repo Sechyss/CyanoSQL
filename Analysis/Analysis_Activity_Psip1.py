@@ -1,4 +1,3 @@
-import os
 import statistics
 
 import matplotlib.pyplot as plt
@@ -7,12 +6,32 @@ import pandas as pd
 import scikit_posthocs as sp
 from scipy import stats, optimize
 
-from CyanoScripts.MyPackage.ActivityAnalysisClass import MetalActivityData, plot_curve_errorbar, \
+from Cyanopackage.ActivityAnalysisClass import MetalActivityData, plot_curve_errorbar, \
     plot_abs_time, r_coefficient_values, michaelis_menten, transform_substratedf_productdf
-from CyanoScripts.MyPackage.Test_Km import plot_lineweaverburk
+from Cyanopackage.Test_Km import plot_lineweaverburk
 
-os.chdir('/Users/u1866168/Documents/OneDrive - University of '
-         'Warwick/Experiments/Analysis_Genes/Psip1/Activity_Experiments/')
+
+def superscript_string(text):
+    superscript_dict = {
+        '0': '\u2070',
+        '1': '\u00B9',
+        '2': '\u00B2',
+        '3': '\u00B3',
+        '4': '\u2074',
+        '5': '\u2075',
+        '6': '\u2076',
+        '7': '\u2077',
+        '8': '\u2078',
+        '9': '\u2079',
+        '-': '\u207B'
+    }
+
+    superscript_text = ''
+    for char in text:
+        superscript_text += superscript_dict.get(char, char)
+
+    return superscript_text
+
 
 # %% Analysis of Bis-pNPP
 bpnppdata = pd.read_excel('Psip1_experiment_pag41_20211125.xlsx', sheet_name='Corrected', index_col='Time')
@@ -191,13 +210,17 @@ means = [statistics.mean(x) for x in pH]
 error = [statistics.stdev(x) for x in pH]
 x = [6.8, 7.5, 8.8, 9.4, 9.8, 10.4, 11.2]
 
-plt.figure()
-plt.rcParams["axes.labelweight"] = "bold"
+figure, ax = plt.subplots(dpi=450)
+#plt.rcParams["axes.labelweight"] = "bold"
 plt.errorbar(x, means, yerr=error, fmt='-o', capsize=2, capthick=1, color='black')
 plt.xlabel('pH values')
-plt.ylabel('ΔAbs(405nm)/min/mg of protein')
+plt.ylabel(r'$\Delta$Abs(405nm) min$^{-1}$ mg protein$^{-1}$')
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+ax.spines['bottom'].set_color('black')
+ax.spines['left'].set_color('black')
 plt.tight_layout()
-plt.savefig('./Figures_22/R_coefficient_pH_paper.pdf', dpi = 300)
+plt.savefig('R_coefficient_pH_paper.pdf', dpi=450)
 plt.show()
 
 # %% Final metal comparison
@@ -379,7 +402,8 @@ amounts_2 = [0, 1.5, 1.8, 2.2, 2.4, 2.5, 3, 4, 5, 6, 10]
 experiment = MetalActivityData(Concat_df)
 curves, rvalue_fit = experiment.fit_curve()
 
-velocity = np.array([list(curves[str(x)].values()) for x in amounts_1])
+velocity = [list(curves[str(x)].values()) for x in amounts_1]
+
 means = [statistics.mean(x) for x in velocity]
 error = [statistics.stdev(x) for x in velocity]
 
@@ -428,19 +452,24 @@ ss_res = np.sum(residuals**2)
 ss_tot = np.sum((means-np.mean(means))**2)
 r_squared = 1 - (ss_res / ss_tot)
 
-plt.rcParams["axes.labelweight"] = "bold"
+figure, ax = plt.subplots(dpi=450)
+#plt.rcParams["axes.labelweight"] = "bold"
 plt.errorbar(amounts_1, means, yerr=error, fmt='o', capsize=2, capthick=1, color='black')
 plt.errorbar(amounts_2, means_2, yerr=error_2, fmt='ko', capsize=2, capthick=1, markerfacecolor='none',
              markeredgecolor='black')
 plt.plot(np.linspace(0, 15, 1000),michaelis_menten(np.linspace(0, 15, 1000), vmax, km),
         "k--", label='Fitted Michaelis-Menten equation')
-plt.text(5, 1, u"R\u00b2 score: {:0.2f}".format(r_squared), style='italic')
-plt.xlabel('PNPP (μM)')
-plt.ylabel('Velocity (nmoles/min/mg)')
+plt.text(5, 1, u"R\u00b2= {:0.2f}".format(r_squared), style='italic')
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+ax.spines['bottom'].set_color('black')
+ax.spines['left'].set_color('black')
+plt.xlabel('$\it{p}$NPP (μM)')
+plt.ylabel(r'Velocity (nmoles min$^{-1}$ mg protein$^{-1}$)')
 
 plt.tight_layout()
 plt.legend(loc='lower right')
-plt.savefig('./Figures_22/RateVelocitykinetics_MM_2_paper.pdf', dpi=300)
+plt.savefig('RateVelocitykinetics_MM_2_paper.pdf', dpi=450)
 plt.show()
 
 # --- Estimation of Km and Vmax using the Lineweaver-Burk plot

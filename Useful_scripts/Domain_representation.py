@@ -3,10 +3,11 @@
 import itertools
 # Install all packages before running main script, look Documentation file on how to do it.
 import os
+import sys
 
 import pandas as pd
 from Bio import SeqIO
-from ete3 import Tree, SeqMotifFace, TreeStyle, NodeStyle
+from ete3 import Tree, SeqMotifFace, TreeStyle
 
 from Cyanopackage.FastaEditing import edit_NCBI_ids
 from Cyanopackage.FileMethods import file_from_list

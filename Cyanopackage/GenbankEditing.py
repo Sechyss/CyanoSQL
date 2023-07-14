@@ -124,3 +124,15 @@ def referenceseqs_single_feature(indirectory, outdirectory, featuretype):
                         except NameError:
                             sys.stderr.write('Error: Check your genomes contain all its features')
                             continue
+
+
+def extract_genome_sequences(genbank_file, fasta_file):
+    with open(genbank_file, 'r') as genbank, open(fasta_file, 'w') as fasta:
+        for record in SeqIO.parse(genbank, 'genbank'):
+            genome_name = record.name
+            genome_sequence = str(record.seq)
+
+            fasta.write(f'>{genome_name}\n{genome_sequence}\n')
+
+    print(f'FASTA file "{fasta_file}" has been created.')
+
