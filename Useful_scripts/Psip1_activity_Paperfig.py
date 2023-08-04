@@ -218,4 +218,4 @@ ax[1, 1].legend(loc='lower right', fontsize=22)
 
 
 plt.tight_layout()
-plt.savefig('Test2.pdf', dpi=450)
+plt.savefig('Test2.pdf', dpi=1000)
