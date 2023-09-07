@@ -1,5 +1,5 @@
 import os
-
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 import pandas as pd
 
@@ -8,15 +8,18 @@ if __name__ == '__main__':
     Substrates = pd.read_excel('/Users/u2176312/OneDrive - University of Warwick/Thesis/Paper '
                                'Draft/organicPbymolybdatePsip.xlsx', sheet_name='ToPlot2', header=0, index_col=0)
     x_value = list(Substrates.index)
-    plt.figure(figsize=(10, 5))
-    plt.rcParams["axes.labelweight"] = "bold"
+    mpl.rcParams['font.size'] = 15
+    mpl.rcParams['font.family'] = 'Arial'
+    fig, ax = plt.subplots(figsize=(11, 11), dpi=450)
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
 
     shapedict = {
-        'PE': ['-', 'o'],
-        'PC': ['--', 'o'],
-        'G3P': ['-.', 'o'],
-        'G1P': [':', 'o'],
-        'PNPP': ['--', '*']
+        'PE': ['-', 'D', 'none'],
+        'PC': ['--', 'D', 'black'],
+        'G3P': ['-.', 'o', 'none'],
+        'G1P': [':', 'o', 'black'],
+        'PNPP': ['--', 's', 'black']
     }
     for column in Substrates.columns:
         if '_std' in str(column):
@@ -26,13 +29,14 @@ if __name__ == '__main__':
             error = list(Substrates[column + '_std'])
             plt.errorbar(x_value, y, yerr=error, capsize=2, capthick=1,
                          fmt=str(shapedict[str(column)][0]) + str(shapedict[str(column)][1]),
-                         markerfacecolor='none',
-                         color='black',
-                         markeredgecolor='black',
-                         label=str(column))
+                         markerfacecolor=shapedict[str(column)][2],
+                         # color='black',
+                         # markeredgecolor='black',
+                         label=str(column),
+                         markersize=8)
     plt.xlabel('Concentration (μM)')
     plt.ylabel('pmols/h of Pi released')
     plt.legend(loc='lower right')
     plt.tight_layout()
-    plt.savefig('Substrate_paper_Psip1_Andrew_2.pdf', dpi=300)
+    #plt.savefig('Substrate_paper_Psip1_Andrew_2.pdf', dpi=450)
     plt.show()
