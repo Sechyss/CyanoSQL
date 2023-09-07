@@ -29,7 +29,7 @@ if __name__ == '__main__':
             error = list(Substrates[column + '_std'])
             plt.errorbar(x_value, y, yerr=error, capsize=2, capthick=1,
                          fmt=str(shapedict[str(column)][0]) + str(shapedict[str(column)][1]),
-                         markerfacecolor=shapedict[str(column)][2],
+                         # markerfacecolor=shapedict[str(column)][2],
                          # color='black',
                          # markeredgecolor='black',
                          label=str(column),
