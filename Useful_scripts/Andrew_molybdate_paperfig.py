@@ -35,8 +35,8 @@ if __name__ == '__main__':
                          label=str(column),
                          markersize=8)
     plt.xlabel('Concentration (μM)')
-    plt.ylabel('pmols/h of Pi released')
+    plt.ylabel('pmol Pi released h$^{-1}$')
     plt.legend(loc='lower right')
     plt.tight_layout()
-    #plt.savefig('Substrate_paper_Psip1_Andrew_2.pdf', dpi=450)
+    plt.savefig('Substrate_paper_Psip1_Andrew_coloured.pdf', dpi=600)
     plt.show()
