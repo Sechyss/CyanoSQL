@@ -21,3 +21,6 @@ clustering in Figure 2.
 on relative abundance in Figure 4.
 - [Reference_Genome_Indexing.py](Scripts%2FReference_Genome_Indexing.py) - Creates the reference genome file needed to mapp the reads using BBMAP.
 
+----------------------------------------------------------------
+[ManifestFiles](ManifestFiles) contains the manifest files used to upload the reads to the repository
+
