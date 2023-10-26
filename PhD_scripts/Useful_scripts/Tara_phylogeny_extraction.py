@@ -1,7 +1,7 @@
 import pandas as pd
 
-from CyanoScripts.MyPackage.FastaEditing import extract_common_sequences
-from CyanoScripts.MyPackage.FileMethods import list_from_file
+from Cyanopackage.FastaEditing import extract_common_sequences
+from Cyanopackage.FileMethods import list_from_file
 
 abundancedf = pd.read_csv('/Users/u1866168/Downloads/OceanGeneAtlas_Data_20211214-13_36_Psip1_hmm/abundance_matrix.csv',
                           sep='\t', header=None, index_col=0)
